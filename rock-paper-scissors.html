@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="game">
+        <h1 id="directions">Play by pressing r, p, or s</h1>
+        <h1 id="user-choice"></h1>
+        <h1 id="comp-choice"></h1>
+        <h1 id="wins"></h1>
+        <h1 id="losses"></h1>
+        <h1 id="ties"></h1>
+
+    </div>
+    <script type="text/javascript">
+        // computer choices, chose at random
+        var computerChoices = ['r', 'p', 's'];
+        // calling on the HTML for user
+        var userChoiceStatement = document.getElementById("user-choice");
+        // calling on the HTML for comp
+        var compChoiceStatement = document.getElementById("comp-choice");
+        // calling on HTML for wins
+        var winsStatement = document.getElementById("wins");
+        // calling on HTML for losses
+        var lossesStatement = document.getElementById("losses");
+        // calling on HTML for ties
+        var tiesStatement = document.getElementById("ties");
+        // variable to count wins
+        var winsTally = 0;
+        // variable to count losses
+        var lossesTally = 0;
+        // variable to count ties
+        var tiesTally = 0;
+
+        var directions = document.getElementById("directions")
+
+        document.onload = function (event) {
+            directions = ("Start playing by pressing r, p, or s");
+        }
+
+
+        document.onkeyup = function (event) {
+            var userChoice = event.key;
+            var compChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+            if ((userChoice === "r" && compChoice === "s") ||
+                (userChoice === "p" && compChoice === "r") ||
+                (userChoice === "s" && compChoice === "p")) {
+                winsTally++;
+            } else if (userChoice === compChoice) {
+                tiesTally++;
+            } else {
+                lossesTally++;
+            }
+            directions.textContent = "";
+            userChoiceStatement.textContent = ("You picked: " + userChoice);
+            compChoiceStatement.textContent = ("Computer picked: " + compChoice);
+            winsStatement.textContent = ("Wins: " + winsTally);
+            lossesStatement.textContent = ("Losses: " + lossesTally);
+            tiesStatement.textContent = ("Ties: " + tiesTally);
+        };
+    </script>
+</body>
+
+</html>
